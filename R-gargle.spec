@@ -4,7 +4,7 @@
 #
 Name     : R-gargle
 Version  : 1.2.0
-Release  : 13
+Release  : 14
 URL      : https://cran.r-project.org/src/contrib/gargle_1.2.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/gargle_1.2.0.tar.gz
 Summary  : Utilities for Working with Google APIs
