@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-gargle
-Version  : 1.4.0
-Release  : 22
-URL      : https://cran.r-project.org/src/contrib/gargle_1.4.0.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/gargle_1.4.0.tar.gz
+Version  : 1.5.0
+Release  : 23
+URL      : https://cran.r-project.org/src/contrib/gargle_1.5.0.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/gargle_1.5.0.tar.gz
 Summary  : Utilities for Working with Google APIs
 Group    : Development/Tools
 License  : MIT
@@ -45,16 +45,19 @@ coverage](https://codecov.io/gh/r-lib/gargle/branch/main/graph/badge.svg)](https
 
 %prep
 %setup -q -n gargle
+pushd ..
+cp -a gargle buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681750504
+export SOURCE_DATE_EPOCH=1686587526
 
 %install
-export SOURCE_DATE_EPOCH=1681750504
+export SOURCE_DATE_EPOCH=1686587526
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -92,6 +95,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
 R CMD check --no-manual --no-examples --no-codoc . || :
 
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -141,12 +145,18 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/gargle/doc/non-interactive-auth.R
 /usr/lib64/R/library/gargle/doc/non-interactive-auth.Rmd
 /usr/lib64/R/library/gargle/doc/non-interactive-auth.html
+/usr/lib64/R/library/gargle/doc/oauth-client-not-app.R
+/usr/lib64/R/library/gargle/doc/oauth-client-not-app.Rmd
+/usr/lib64/R/library/gargle/doc/oauth-client-not-app.html
 /usr/lib64/R/library/gargle/doc/request-helper-functions.R
 /usr/lib64/R/library/gargle/doc/request-helper-functions.Rmd
 /usr/lib64/R/library/gargle/doc/request-helper-functions.html
 /usr/lib64/R/library/gargle/doc/troubleshooting.R
 /usr/lib64/R/library/gargle/doc/troubleshooting.Rmd
 /usr/lib64/R/library/gargle/doc/troubleshooting.html
+/usr/lib64/R/library/gargle/extdata/client_secret_installed.googleusercontent.com.json
+/usr/lib64/R/library/gargle/extdata/client_secret_web.googleusercontent.com.json
+/usr/lib64/R/library/gargle/extdata/fake_service_account.json
 /usr/lib64/R/library/gargle/help/AnIndex
 /usr/lib64/R/library/gargle/help/aliases.rds
 /usr/lib64/R/library/gargle/help/figures/lifecycle-archived.svg
@@ -171,6 +181,7 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/Gargle-class.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/cred_funs.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/credentials_byo_oauth2.md
+/usr/lib64/R/library/gargle/tests/testthat/_snaps/credentials_service_account.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/gargle_oauth_client.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/gargle_oauth_endpoint.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/inside-the-house.md
@@ -182,9 +193,10 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/request_retry.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/response_process.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/roxygen-templates.md
+/usr/lib64/R/library/gargle/tests/testthat/_snaps/secret.md
 /usr/lib64/R/library/gargle/tests/testthat/_snaps/utils-ui.md
-/usr/lib64/R/library/gargle/tests/testthat/fixtures/client_secret_123.googleusercontent.com.json
-/usr/lib64/R/library/gargle/tests/testthat/fixtures/client_secret_456.googleusercontent.com.json
+/usr/lib64/R/library/gargle/tests/testthat/fixtures/drive-automated-queries_429.R
+/usr/lib64/R/library/gargle/tests/testthat/fixtures/drive-automated-queries_429.rds
 /usr/lib64/R/library/gargle/tests/testthat/fixtures/drive-files-get-nonexistent-file-id_404.R
 /usr/lib64/R/library/gargle/tests/testthat/fixtures/drive-files-get-nonexistent-file-id_404.rds
 /usr/lib64/R/library/gargle/tests/testthat/fixtures/fitness-get-wrong-scope_403.R
@@ -212,6 +224,7 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/gargle/tests/testthat/test-credentials_app_default.R
 /usr/lib64/R/library/gargle/tests/testthat/test-credentials_byo_oauth2.R
 /usr/lib64/R/library/gargle/tests/testthat/test-credentials_gce.R
+/usr/lib64/R/library/gargle/tests/testthat/test-credentials_service_account.R
 /usr/lib64/R/library/gargle/tests/testthat/test-field_mask.R
 /usr/lib64/R/library/gargle/tests/testthat/test-gargle_oauth_client.R
 /usr/lib64/R/library/gargle/tests/testthat/test-gargle_oauth_endpoint.R
@@ -224,6 +237,7 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/gargle/tests/testthat/test-request_retry.R
 /usr/lib64/R/library/gargle/tests/testthat/test-response_process.R
 /usr/lib64/R/library/gargle/tests/testthat/test-roxygen-templates.R
+/usr/lib64/R/library/gargle/tests/testthat/test-secret.R
 /usr/lib64/R/library/gargle/tests/testthat/test-token-info.R
 /usr/lib64/R/library/gargle/tests/testthat/test-token_fetch.R
 /usr/lib64/R/library/gargle/tests/testthat/test-utils-ui.R
