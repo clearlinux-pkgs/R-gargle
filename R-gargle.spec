@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-gargle
-Version  : 1.5.0
-Release  : 24
-URL      : https://cran.r-project.org/src/contrib/gargle_1.5.0.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/gargle_1.5.0.tar.gz
+Version  : 1.5.1
+Release  : 25
+URL      : https://cran.r-project.org/src/contrib/gargle_1.5.1.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/gargle_1.5.1.tar.gz
 Summary  : Utilities for Working with Google APIs
 Group    : Development/Tools
 License  : MIT
@@ -54,10 +54,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686587526
+export SOURCE_DATE_EPOCH=1687276546
 
 %install
-export SOURCE_DATE_EPOCH=1686587526
+export SOURCE_DATE_EPOCH=1687276546
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
